@@ -1,1 +1,1 @@
-# dynamicsweekly_website
+# Dynamics Weekly Website
