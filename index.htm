@@ -31,25 +31,7 @@
 		Old issues are still <a target="_blank" href="https://www.getrevue.co/profile/DynamicsWeekly/">online</a> but you can subscribe to other newsletters about Power Platform:
 		<br/><br/>
 		<table border="0">
-			<tr>
-				<td width="300" align="center">
-					<figure>
-						<a target="_blank" href="https://www.powerplatformdevelopersweekly.com"><img src="assets/ppdw.jpg" /></a>
-						<figcaption><a target="_blank" href="https://www.powerplatformdevelopersweekly.com">Power Platform Developers Weekly</a></figcaption>
-					</figure>
-				</td>
-				<td width="300" align="center">
-					<figure>
-						<a target="_blank" href="https://www.ppweekly.com"><img src="assets/ppw.jpg" /></a>
-						<figcaption><a target="_blank" href="https://www.ppweekly.com">Power Platform Weekly</a></figcaption>
-					</figure>
-				</td>
-				<td width="300" align="center">
-					<figure>
-						<a target="_blank" href="https://forwardforever.news"><img src="assets/ffm.jpg" /></a>
-						<figcaption><a target="_blank" href="https://forwardforever.news">Forward Forever Monthly</a></figcaption>
-					</figure>
-				</td>
+			<tr id="row">
 			</tr>
 		</table>
 		<br/><br/><br/>
@@ -59,5 +41,38 @@
 		<br/>
 		<small><a target="_blank" href="https://github.com/GuidoPreite">GitHub</a> - <a target="_blank" href="https://www.linkedin.com/in/guidopreite/">LinkedIn</a> - <a target="_blank" href="https://twitter.com/crmanswers">Twitter</a> - <a target="_blank" href="https://www.crmanswers.net">Blog</a></small>
 	</center>
+	<script>
+	// https://bost.ocks.org/mike/shuffle/
+	function shuffle(array) {
+		var m = array.length, t, i;
+		while (m) {    
+			i = Math.floor(Math.random() * m--);
+			t = array[m];
+			array[m] = array[i];
+			array[i] = t;
+		}
+		return array;
+	}
+	
+	// data
+	var newsletters = [];
+	newsletters.push({ name: "Power Platform Developers Weekly", url: "https://www.powerplatformdevelopersweekly.com", logo: "assets/ppdw.jpg" });
+	newsletters.push({ name: "Power Platform Weekly", url: "https://www.ppweekly.com", logo: "assets/ppw.jpg" });
+	newsletters.push({ name: "Forward Forever Monthly", url: "https://forwardforever.news", logo: "assets/ffm.jpg" });
+	newsletters.push({ name: "Power Platform Magazine (Spanish)", url: "https://www.powerplatformmagazine.com", logo: "assets/ppm.jpg" });	
+	var shuffledNewsletters = shuffle(newsletters);
+	
+	// display data
+	var tr = document.getElementById("row");
+	var template = '<figure><a target="_blank" href="{{url}}"><img src="{{logo}}" /></a><figcaption><a target="_blank" href="{{url}}">{{name}}</a></figcaption></figure>';
+	shuffledNewsletters.forEach(function(newsletter) {
+		var replacedNewsletter = template.replace(/{{name}}/gi, newsletter.name).replace(/{{url}}/gi, newsletter.url).replace(/{{logo}}/gi, newsletter.logo);
+		var td = document.createElement('td');
+		td.width = "300";
+		td.align = "center";
+		td.innerHTML = replacedNewsletter;
+		tr.appendChild(td);
+	});
+	</script>
 </body>
 </html>
